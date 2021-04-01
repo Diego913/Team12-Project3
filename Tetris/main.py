@@ -3,15 +3,10 @@ from pygame.locals import *
 from Blocks import*
 from Game import*
    
-def print_text(screen, font, x, y, text, fcolor=(255, 255, 255)):
-    imgText = font.render(text, True, fcolor)
-    screen.blit(imgText, (x, y))
-
 pygame.init()
 screen = pygame.display.set_mode((800,700))
 pygame.display.set_caption("Tetris")
 clock = pygame.time.Clock()
-
 
 run = True
 accelerate = 25
@@ -24,6 +19,11 @@ floralwhite= (255, 250, 240, 255)
 coral = (255, 127, 80, 255)
 font1 = pygame.font.SysFont(None, 50)  
 font2 = pygame.font.SysFont(None, 30)
+
+def print_text(screen, font, x, y, text, color):
+    imgText = font.render(text, True, color)
+    screen.blit(imgText, (x, y))
+
 
 while run:
     screen.fill((0,0,0))
