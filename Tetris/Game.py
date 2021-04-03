@@ -1,6 +1,9 @@
 from pygame.constants import K_PAUSE
 from Blocks import*
 
+##Game
+#Class that controls the functions and runs the entire tetris game
+#
 class Game:
     state = "on"
     field = []
@@ -11,9 +14,13 @@ class Game:
     size = 30
     figure = None
 
+    ##Start
+    #gives sets self.figure the object Figure(5,0)
     def Start(self):
         self.figure = Figure(5, 0)
 
+    ##Constructor of Game
+    # initializes height, width, and space list
     def __init__(self, m_height, m_width):
         self.height = m_height
         self.width = m_width
@@ -22,10 +29,12 @@ class Game:
             for j in range(0,m_width):
                 space.append(0)
             self.field.append(space)
-    
+
+    ##intersects
+    #check function that ensures shapes do not intersect
     def intersects(self):
         intersection = False
-        # Because every shape contains 4 blocks 
+        # Because every shape contains 4 blocks
         # travelsal
         for i in range(0,4):
             for j in range(0,4):
@@ -34,6 +43,8 @@ class Game:
                         intersection = True
         return intersection
 
+    ##eliminate
+    #removes the bottom when all of the shapes cover it.
     def eliminate(self):
         line = 0
         for i in range(1, self.height):
@@ -46,40 +57,47 @@ class Game:
                 for k in range(i, 1, -1):
                     for z in range(0,self.width):
                         self.field[k][z] = self.field[k - 1][z]
-    
+
+    ##CantPlace
+    #checker function that prevents the player from placing a shape at an invalid position
     def CantPlace(self):
         for i in range(0,self.height):
             for j in range(0,4):
                 if i * 4 + j in self.figure.shape():
                     self.field[i + self.figure.vertical][j + self.figure.horizontal] = self.figure.color
         self.eliminate()
-        self.Start() 
+        self.Start()
         if self.intersects():
             newGame.state = "off"
 
+    ##moveLeft
+    #moves the shape left one space
     def moveLeft(self):
         before = self.figure.horizontal
         self.figure.horizontal = self.figure.horizontal - 1
         if self.intersects():
             self.figure.horizontal = before
 
+    ##moveRight
+    #moves the shape right one space
     def moveRight(self):
         before = self.figure.horizontal
         self.figure.horizontal = self.figure.horizontal + 1
         if self.intersects():
             self.figure.horizontal = before
 
+    ##rotate
+    #rotates the shape
     def rotate(self):
         before = self.figure.rotation
         self.figure.rotate()
         if self.intersects():
             self.figure.rotation = before
 
+    ##DownWords
+    #moves the shape down the screen
     def DownWords(self):
         self.figure.vertical = self.figure.vertical + 1
         if self.intersects():
             self.figure.vertical = self.figure.vertical - 1
             self.CantPlace()
-
- 
-
