@@ -21,7 +21,7 @@ blockShape = [
         [[1, 2, 5, 6]],# suqare type
     ]
 
-##Figure Class
+##Figure
 #configures the horizontal and vertical shapes then randomizes the color and orientation of the shape
 #
 #
@@ -30,7 +30,10 @@ class Figure:
     vertical = 0
 
     ## The constructor
-    #initializes horizontal, vertical, and rotation
+    #  @param self The object pointer
+    #  @param horizontal initializes horizontal variable
+    #  @param vertical initializes vertical variable
+    #  initializes horizontal, vertical, and rotation
     def __init__(self, horizontal, vertical):
         self.horizontal = horizontal
         self.vertical = vertical
@@ -43,11 +46,14 @@ class Figure:
 
 
     #call whenever player rotate the shape
-    ##rotate function
-    #calls whenver player rotates the shape
+    ## rotate
+    #  @param self The object pointer
+    #
+    #  calls whenver player rotates the shape
     def rotate(self):
         self.rotation = (self.rotation + 1) % len(blockShape[self.type])
-    ##shape function
-    #returns the shape of the block, including the type of shape and orientation of it
+    ## shape
+    # @param self The object pointer
+    #  returns the shape of the block, including the type of shape and orientation of it
     def shape(self):
         return blockShape[self.type][self.rotation]
