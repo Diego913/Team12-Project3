@@ -8,7 +8,7 @@ pygame.display.set_caption('Pong')
 font = pygame.font.SysFont("arial", 20)
 ## Ball Class
 class Ball:
-    ## The constructor
+    ## Constructor
     #  @param self The object pointer
     def __init__(self):
         self.x = 375
@@ -94,13 +94,15 @@ def scoreboard():
     screen.blit(player1Score, (170, 0))
     screen.blit(player2Score, (420, 0))
 
-
+## checkPaddleBounce
+# detects ball touching paddle and changes it's direction
 def checkPaddleBounce():
     if ball.x <= 50 and (ball.y >= paddle1.y and ball.y <= paddle1.y + 80):
             ball.xDirection = 1
     if ball.x >= 690 and (ball.y >= paddle2.y and ball.y <= paddle2.y + 80):
             ball.xDirection = -1
-
+## score
+# increments score for each player/paddle
 def score():
     if ball.x > 750:
             paddle1.score += 1
@@ -109,6 +111,8 @@ def score():
             paddle2.score += 1
             resetBall("p2")
 
+## resetBall 
+# After a score, the ball resets to middle of map
 def resetBall(paddle):
     ball.x = 375
     ball.y = 250
@@ -117,13 +121,17 @@ def resetBall(paddle):
     elif paddle == "p2":
         ball.xDirection = 1
 
+## gameOver
+# detects when win condition is met
 def gameOver():
-    if paddle1.score == 2:
+    if paddle1.score == 5:
         return True
-    if paddle2.score == 2:
+    if paddle2.score == 5:
         return True
     return False
 
+## gameOverScreen
+# displays gameover screen and clears everything else
 def gameOverScreen():
     if paddle1.score == 5:
         screen.fill((0,0,0))
@@ -134,6 +142,8 @@ def gameOverScreen():
         go = font.render("Player 2 Wins", 1, (255,255,255))
         screen.blit(go, (375,250))
 
+## main 
+# This is the main method that invokes other methods.
 def main():
     run = True
 
