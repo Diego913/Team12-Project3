@@ -2,6 +2,7 @@
 .topnav {
   background-color: #333;
   overflow: hidden;
+  margin-bottom:-5px ;
 }
 
 .topnav a {
@@ -19,7 +20,7 @@
 }
 
 .topnav a.active {
-  background-color: blue;
+  background-color: rgb(107, 107, 117);
   color: white;
 }
 
@@ -28,4 +29,18 @@
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+h1{
+  padding: 0;
+  margin: 4pt 0pt;
+  text-align: center;
+  font-size: 28pt;
+  color: #01050c;
+}
+
+.center{
+  clear:both;
+  display:block;
+  margin:auto;
 }
