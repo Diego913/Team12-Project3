@@ -1,5 +1,5 @@
 import pygame
-from pygame.locals import *
+from pygame.locals import*
 from Blocks import*
 from Game import*
 
@@ -24,6 +24,12 @@ newGame = Game(20, 13)
 ##faster variable
 faster = False
 
+##variables for testing
+m_left = False
+m_right = False
+m_rotate = False
+m_down=False
+
 ##lightsteelblue color
 lightsteelblue = (188, 210, 238, 255)
 ##floralwhite color
@@ -47,7 +53,6 @@ def print_text(screen, font, x, y, text, color):
 while run:
     screen.fill((0,0,0))
     Score = str(newGame.score) 
-    Shape=(newGame.figure)
     pygame.draw.line(screen,coral,(450,50),(450,650),3)
     print_text(screen, font1,490,85, "Score:"+Score,lightsteelblue)
     print_text(screen, font1,490,350, "Menu: ", lightsteelblue)
@@ -79,12 +84,16 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 newGame.rotate()
+                m_rotate=True
             if event.key == pygame.K_DOWN:
                 faster = True
+                m_down=True
             if event.key == pygame.K_LEFT:
                 newGame.moveLeft()
+                m_left=True
             if event.key == pygame.K_RIGHT:
                 newGame.moveRight()
+                m_right=True
 
         if event.type == pygame.KEYUP:
             faster = False

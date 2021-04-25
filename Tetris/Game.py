@@ -14,7 +14,7 @@ class Game:
     size = 30
     figure = None
     score=0
-
+    cancle = False
     ## Start
     # @param self The object pointer
     #  gives sets self.figure the object Figure(5,0)
@@ -66,6 +66,7 @@ class Game:
                     for z in range(0,self.width):
                         self.field[k][z] = self.field[k - 1][z]
         self.score += line ** 2
+        self.cancle=True
 
     ## CantPlace
     #  @param The object pointer
