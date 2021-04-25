@@ -6,7 +6,7 @@ from settings import *
 from snake import Snake
 from food import Food
 
-##  drawGrid
+##  Draws the grid
 #   @param surface Serves as variable that holds the canvas python uses to draw on the screen
 #   draws the checkerboard pattern onto the screen, creating the board the snake moves on
 def drawGrid(surface):
@@ -20,7 +20,7 @@ def drawGrid(surface):
                 pygame.draw.rect(surface, (9, 78, 217), rr)
 
 
-##  main
+##  Main function that has the main game loop
 #   main function that serves that collects all of the functions from each class and uses them to run the game
 def main():
     pygame.init()

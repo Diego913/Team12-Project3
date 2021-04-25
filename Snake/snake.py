@@ -13,7 +13,7 @@ class Snake():
         self.lengthBody = 1
         self.death = False
 
-    ##  draw
+    ##  Draws snake onto screen
     #   @param self The object pointer
     #   @param surface Serves as variable that holds the canvas python uses to draw on the screen
     #   draws the snake sprite
@@ -23,7 +23,7 @@ class Snake():
             pygame.draw.rect(surface, self.snakeColor, r)
             pygame.draw.rect(surface, (93,216, 228), r, 1)
 
-    ##  movement
+    ##  Moves the snake according to key buttons
     #   @param self The object pointer
     #   handles movement of snake through listening for key presses
     def movement(self):
@@ -41,13 +41,13 @@ class Snake():
                 elif event.key == pygame.K_RIGHT:
                     self.turn(right)
 
-    ##  headPos
+    ##  Returns position of snakes's head
     #   @param self The object pointer
     #getter function that returns the location of the head of the snake
     def headPos(self):
         return self.pos[0]
 
-    ##  headPos
+    ##  Tunrs the snake 
     #   @param self The object pointer
     #   @param point holds the direction from user input
     #   paths how the snake turns on the grid
@@ -57,7 +57,7 @@ class Snake():
         else:
             self.direction = point
 
-    ##  move
+    ##  Moves the snake, performs growth and death scenario
     #   @param self The object pointer
     #   handles the movement of the snake and its body parts as it gets bigger
     def move(self):
@@ -82,7 +82,7 @@ class Snake():
             if currentPos[1] == 0:
                 self.death = True
 
-    ##  reset
+    ##  Restarts the snake game due to death
     #   @param self The object pointer
     #   resets the game game by making the snake the oringal length, placing them in the middle of the screen, resetting the score, and sending them in a random direction
     def reset(self):
