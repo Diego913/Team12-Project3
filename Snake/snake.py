@@ -3,7 +3,7 @@ import sys
 import random
 from settings import *
 
-
+## Snake Class
 class Snake():
     def __init__(self):
         self.pos = [((screen_width/2), (screen_height/2))]
@@ -13,14 +13,19 @@ class Snake():
         self.lengthBody = 1
         self.death = False
 
-    #draws the snake sprite
+    ##  draw
+    #   @param self The object pointer
+    #   @param surface Serves as variable that holds the canvas python uses to draw on the screen
+    #   draws the snake sprite
     def draw(self,surface):
         for p in self.pos:
             r = pygame.Rect((p[0], p[1]), (gridsize,gridsize))
             pygame.draw.rect(surface, self.snakeColor, r)
             pygame.draw.rect(surface, (93,216, 228), r, 1)
 
-    #handles movement of snake through listening for key presses
+    ##  movement
+    #   @param self The object pointer
+    #   handles movement of snake through listening for key presses
     def movement(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -36,17 +41,25 @@ class Snake():
                 elif event.key == pygame.K_RIGHT:
                     self.turn(right)
 
+    ##  headPos
+    #   @param self The object pointer
     #getter function that returns the location of the head of the snake
     def headPos(self):
         return self.pos[0]
 
+    ##  headPos
+    #   @param self The object pointer
+    #   @param point holds the direction from user input
+    #   paths how the snake turns on the grid
     def turn(self, point):
         if self.lengthBody > 1 and (point[0]*-1, point[1]*-1) == self.direction:
             return
         else:
             self.direction = point
 
-    #handles the movement of the snake and its body parts as it gets bigger
+    ##  move
+    #   @param self The object pointer
+    #   handles the movement of the snake and its body parts as it gets bigger
     def move(self):
         currentPos = self.headPos()
         x,y = self.direction
@@ -69,8 +82,9 @@ class Snake():
             if currentPos[1] == 0:
                 self.death = True
 
-
-    #resets the game game by making the snake the oringal length, placing them in the middle of the screen, resetting the score, and sending them in a random direction
+    ##  reset
+    #   @param self The object pointer
+    #   resets the game game by making the snake the oringal length, placing them in the middle of the screen, resetting the score, and sending them in a random direction
     def reset(self):
         death = False
         self.gameScore = 0
