@@ -13,6 +13,7 @@ class Game:
     vertical = 50
     size = 30
     figure = None
+    score=0
 
     ## Start
     # @param self The object pointer
@@ -28,6 +29,7 @@ class Game:
     def __init__(self, m_height, m_width):
         self.height = m_height
         self.width = m_width
+        self.score = 0
         for i in range(0,m_height):
             space = []
             for j in range(0,m_width):
@@ -63,6 +65,7 @@ class Game:
                 for k in range(i, 1, -1):
                     for z in range(0,self.width):
                         self.field[k][z] = self.field[k - 1][z]
+        self.score += line ** 2
 
     ## CantPlace
     #  @param The object pointer
@@ -75,7 +78,7 @@ class Game:
         self.eliminate()
         self.Start()
         if self.intersects():
-            newGame.state = "off"
+            self.state = "off"
 
     ## moveLeft
     #  @param The object pointer
