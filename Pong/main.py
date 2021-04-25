@@ -82,7 +82,7 @@ def draw():
         paddle2.drawPaddle()
         scoreboard()
         pygame.display.update()
-        clock.tick(20)
+        clock.tick(25)
     else:
         gameOverScreen()
         pygame.display.update()
@@ -139,19 +139,22 @@ def gameOverScreen():
         go = font.render("Player 1 Wins", 1, (255,255,255))
         pa = font.render("PRESS SPACEBAR to Play Again", 1, (255,255,255))
         screen.blit(go, (320,230))
-        screen.blit(pa,(320,250))
+        screen.blit(pa,(320,260))
     elif paddle2.score == 5:
         screen.fill((0,0,0))
-        go = font.render("Player 2 Wins\nPRESS SPACEBAR to Play Again", 1, (255,255,255))
+        go = font.render("Player 2 Wins", 1, (255,255,255))
         pa = font.render("PRESS SPACEBAR to Play Again", 1, (255,255,255))  
         screen.blit(go, (320,230))
-        screen.blit(pa,(320,250))
+        screen.blit(pa,(320,260))
 
 def reset():
     paddle1.score = 0
     paddle2.score = 0
+    paddle1.y = 210
+    paddle2.y = 210
     ball.x = 375
     ball.y = 250
+
 
 ## main 
 # This is the main method that invokes other methods.
