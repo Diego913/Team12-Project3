@@ -6,6 +6,7 @@ pygame.init()
 screen = pygame.display.set_mode((750,500))
 pygame.display.set_caption('Pong')
 font = pygame.font.SysFont("arial", 20)
+
 ## Ball Class
 class Ball:
     ## Constructor
@@ -31,9 +32,9 @@ class Ball:
     ##checkForWall
     #  @param The object pointer
     def checkForWall(self):
-        if self.y > 500:
+        if self.y > 490:
             self.yDirection = -1
-        if self.y < 0:
+        if self.y < 10:
             self.yDirection = 1
 
 ##Paddle Class
@@ -81,7 +82,7 @@ def draw():
         paddle2.drawPaddle()
         scoreboard()
         pygame.display.update()
-        clock.tick(25)
+        clock.tick(20)
     else:
         gameOverScreen()
         pygame.display.update()
@@ -90,7 +91,7 @@ def draw():
 #  renders the wording for the scoreboard
 def scoreboard():
     player1Score = font.render("Player 1 Score: {0}".format(paddle1.score), 1, (255,255,255))
-    player2Score = font.render("Player 1 Score: {0}".format(paddle2.score), 1, (255,255,255))
+    player2Score = font.render("Player 2 Score: {0}".format(paddle2.score), 1, (255,255,255))
     screen.blit(player1Score, (170, 0))
     screen.blit(player2Score, (420, 0))
 
@@ -136,16 +137,27 @@ def gameOverScreen():
     if paddle1.score == 5:
         screen.fill((0,0,0))
         go = font.render("Player 1 Wins", 1, (255,255,255))
-        screen.blit(go, (375,250))
+        pa = font.render("PRESS SPACEBAR to Play Again", 1, (255,255,255))
+        screen.blit(go, (320,230))
+        screen.blit(pa,(320,250))
     elif paddle2.score == 5:
         screen.fill((0,0,0))
-        go = font.render("Player 2 Wins", 1, (255,255,255))
-        screen.blit(go, (375,250))
+        go = font.render("Player 2 Wins\nPRESS SPACEBAR to Play Again", 1, (255,255,255))
+        pa = font.render("PRESS SPACEBAR to Play Again", 1, (255,255,255))  
+        screen.blit(go, (320,230))
+        screen.blit(pa,(320,250))
+
+def reset():
+    paddle1.score = 0
+    paddle2.score = 0
+    ball.x = 375
+    ball.y = 250
 
 ## main 
 # This is the main method that invokes other methods.
 def main():
     run = True
+    gameOver = False
 
     while run:
         for event in pygame.event.get():
@@ -161,8 +173,16 @@ def main():
             paddle2.move(1)
         if key[pygame.K_i]:
             paddle2.move(-1)
+        if key[pygame.K_SPACE] and gameOver == True:
+            reset()
+            gameOver = False
 
-        if gameOver() == False:
+        if paddle1.score == 5:
+            gameOver = True
+        if paddle2.score == 5:
+            gameOver = True
+            
+        if gameOver == False:
             score()
             checkPaddleBounce()
             ball.checkForWall()
