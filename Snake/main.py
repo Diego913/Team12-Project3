@@ -43,7 +43,7 @@ def main():
         snake.movement()
         drawGrid(surface)
         snake.move()
-        if snake.headPos() == food.position:
+        if snake.headPos() == food.pos:
             snake.lengthBody += 1
             snake.gameScore += 1
             food.randomPos()
